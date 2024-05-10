@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="homeApp">
+
+<head>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./welcomePage/assets/img/logo.png" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Home / F co.</title>
+</head>
+
+<body ng-controller="homeController">
+    <div class="container">
+        <div class="sidebar">
+            <div class="w-full">
+                <div class="carrinho">
+                    <a href="./cart/index.html">
+                        <img src="./global/img/carrinho.png" alt="Carrinho" width="25">
+                        <span class="item-quantidade">{{cartItems}}</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="#" class="active">Home</a>
+                </div>
+                <div class="menu-item">
+                    <a href="./cart/cartFinish/index.html">Histórico</a>
+                </div>
+            </div>
+            <div class="footer-sidebar">
+                <div>
+                    <div class="menu-item" ng-if="role === 'admin'" ng-click="openModalProducts(1)">
+                        <a href="./admin/index.html">Admin</a>
+                    </div>
+                    <div class="menu-item" ng-click="logout()">
+                        <a href="../index.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="filter">
+                <div class="lupa">
+                    <i class="bi bi-search"></i>
+                    <input type="search" placeholder="Busque pelo produto..." ng-model="searchTerm" ng-change="searchProducts()">
+                </div>
+            </div>
+            <div class="content">
+                <div class="card" ng-repeat="data in products">
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img src="./welcomePage/assets/img/camisetablockk.png" alt="Camiseta">
+                        </div>
+                        <div class="card-footer">
+                            <div>
+                                <h3>Camiseta Blockkstar</h3>
+                                <p class="description">Blockkstar é uma marca streetwear que vem crescendo na cena. Vale a pena conhecer!</p>
+                            </div>
+                            <p class="price">{{ data.price | currency:'R$ ':2 }}</p>
+                            <button type="button" ng-click="addToCart(data.id, data.price)">ADICIONAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="../global/scripts/routeConfigs.js"></script>
+<script src="./assets/scripts/main.js"></script>
+
+</html>
